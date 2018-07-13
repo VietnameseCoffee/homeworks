@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Music</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+    <% if logged_in? %>
+      Hello <%= @user.email %> !
+      <form  action="<%= session_url %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="Log Out Bruh">
+      </form>
+
+    <% else %>
+      <a href="<%= new_user_url %>">Sign up!</a>
+      <a href="<%= new_session_url %>">Log In!</a>
+      
+    <% end %>
+  </header>
+  <h1> THE WORST MUSIC APP EVER THERE AINT EVEN MUSIC </h1>
+
+    <%= flash.now[:errors] %>
+    <%= yield %>
+  </body>
+</html>
